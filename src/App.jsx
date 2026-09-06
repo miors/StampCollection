@@ -6,31 +6,18 @@ import staticColumnBg from "./assets/big-ben.jpg";
 import headerBg from "./assets/union-jack3.jpg";
 import scrollColumnBg from "./assets/reddish.png";
 import unionJack from "./assets/union-jack-transparent.png";
-import invertedJenny from "./assets/inverted-jenny.jpg";
 import stampLogo from "./assets/stamp.png";
 
 const defaultImage = "picsum.photos/200";
-
-// function Stamp({stamps}){
-//   return(<>
-//   {stamps.map(stamp =>
-//   <ul key={stamp.title}>
-//     <li>{stamp.title}</li>
-//     <li><img src={"https://"+stamp.image} alt="random picture" /></li>
-//     <li>Country: {stamp.country}</li>
-//     <li>Rating: {stamp.rating}</li>
-//   </ul>
-//   )}
-
-// </>);
-// }
+// colors for ratings
 const colors = {
   red: "red",
   grey: "a9a9a9",
 };
-
+// for ratings
 const stars = Array(5).fill(0);
 
+// to print cards
 function Stamp({ stamps }) {
   return (
     <div
@@ -53,7 +40,7 @@ function Stamp({ stamps }) {
             backgroundImage: `url(${staticColumnBg})`,
           }}
         >
-          <Card.Title>{stamp.title}</Card.Title>
+          <Card.Title style={{ fontSize: `2rem` }}>{stamp.title}</Card.Title>
           <Card.Img
             variant="top"
             src={"https://" + stamp.image}
@@ -90,7 +77,7 @@ function Stamp({ stamps }) {
                 />
               );
             })}
-            <span>({stamp.rating} Stars)</span>
+            <span style={{ fontSize: `0.75rem` }}>({stamp.rating} Stars)</span>
           </Card.Body>
         </Card>
       ))}
@@ -116,6 +103,7 @@ function GenericDropdown({ options, value, onChange, className = "", id }) {
 }
 
 function App() {
+  // initialise current stamps collection
   const [allStamps, setAllStamps] = useState([
     {
       title: "Penny Red",
@@ -132,6 +120,13 @@ function App() {
       rating: "4/5",
     },
     {
+      title: "1938 Koala",
+      image:
+        "i.guim.co.uk/img/media/90c1dd3fdb8abef5193804d2f8b0de55c64f3ca2/0_0_590_700/master/590.png?width=445&dpr=1&s=none&crop=none",
+      country: "Australia",
+      rating: "5/5",
+    },
+    {
       title: "Malay States",
       image:
         "www.paulfrasercollectibles.com/cdn/shop/files/RS3359_500x.jpg?v=1716542406",
@@ -145,6 +140,7 @@ function App() {
       rating: "4/5",
     },
   ]);
+  // initialise other states
   const [stamps, setStamps] = useState(allStamps);
   const [stampName, setStampName] = useState("");
   const [stampImage, setStampImage] = useState("");
@@ -155,13 +151,15 @@ function App() {
   const [validated, setValidated] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // validate stamp's name field
   function validate() {
     const newErrors = {};
     if (!stampName.trim()) newErrors.stampName = "Stamp name is required";
-    // Optionally validate image URL, country, rating...
+
     return newErrors;
   }
 
+  // filter stamp via buttons
   function filterStamp(flag, stampsArray = allStamps) {
     setCurrentFilter(flag);
     if (flag === "all") {
@@ -175,6 +173,8 @@ function App() {
       setFilteredStampNum(filtered.length);
     }
   }
+
+  // add new stamps
   function addStamp(e) {
     e.preventDefault();
     const formErrors = validate();
@@ -193,9 +193,11 @@ function App() {
       return;
     }
 
+    // to use given stamp's image URL or use default from picsum
     const imageToUse = stampImage.trim() === "" ? defaultImage : stampImage;
     const newStamp = { title: stampName, image: imageToUse, country, rating };
 
+    // update allStamps states with the new stamp info
     const updatedAll = [...allStamps, newStamp];
     setAllStamps(updatedAll);
 
@@ -209,47 +211,7 @@ function App() {
     setRating("1/5");
   }
 
-  // function addStamp(e){
-  //   e.preventDefault();
-
-  //   const imageToUse = stampImage.trim()===""?defaultImage:stampImage
-  // const newStamp = {title: stampName, image: imageToUse, country: country, rating: rating};
-  // const updatedAll = [...allStamps, newStamp];
-  // setAllStamps(updatedAll);
-
-  // if (currentFilter === "all") {
-  //   setStamps(updatedAll);
-  //   setFilteredStampNum(updatedAll.length);
-  // } else {
-  //   const filtered = updatedAll.filter(s => s.country === currentFilter);
-  //   setStamps(filtered);
-  //   setFilteredStampNum(filtered.length);
-  // }
-  // // reset inputs
-  // setStampName("");
-  // setStampImage("");
-  // setCountry("UK");
-  // setRating("1/5");
-  // }
-
-  //   function addStamp1(e) {
-  //   e.preventDefault();
-
-  //   const imageToUse = stampImage.trim() === "" ? defaultImage : stampImage;
-  //   const newStamp = { title: stampName, image: imageToUse, country, rating };
-  //   const updatedAll = [...allStamps, newStamp];
-  //   setAllStamps(updatedAll);
-
-  //   filterStamp(currentFilter, updatedAll); // Use updatedAll here!
-
-  //   // reset inputs
-  //   setStampName("");
-  //   setStampImage("");
-  //   setCountry("UK");
-  //   setRating("1/5");
-  // }
-
-  const countryOptions = ["UK", "Malaysia", "USA"];
+  const countryOptions = ["UK", "Malaysia", "USA", "Australia"];
   const ratingOptions = ["1/5", "2/5", "3/5", "4/5", "5/5"];
 
   return (
@@ -266,24 +228,53 @@ function App() {
               className="sticky-top border border-5"
               style={{
                 WebkitTextStroke: `1px black`,
-                textAlign: "center",
                 borderRadius: `1rem`,
                 paddingTop: `1rem`,
-                height: "8rem",
+                height: "12rem",
                 backgroundImage: `url(${headerBg})`,
                 color: `red`,
                 fontWeight: `4000`,
                 fontSize: `2rem`,
                 marginBottom: `1rem`,
                 display: `flex`,
-                flexDirection: `row`,
-                justifyContent: `space-evenly`,
+                justifyContent: `space-between`, // push left and right apart
                 alignItems: `center`,
               }}
             >
-              <Image src={stampLogo} width={100} alt="Company Logo" fluid />
-              <span style={{ color: `blue` }}>StampsCo</span>
-              <h3>Treasured Stamps of the British Empire</h3>
+              {/* Left side: logo + StampsCo stacked vertically, aligned left */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "0.25rem",
+                }}
+              >
+                <Image src={stampLogo} width={100} alt="Company Logo" fluid />
+                <span
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: "1.25rem",
+                    paddingLeft: `1rem`,
+                  }}
+                >
+                  StampsCo
+                </span>
+              </div>
+
+              {/* Right side: heading text right aligned */}
+              <h3
+                style={{
+                  margin: 0,
+                  textAlign: "right",
+                  paddingRight: `2rem`,
+                  flex: 1,
+                  fontSize: `3rem`,
+                }}
+              >
+                Treasured Stamps of the British Empire
+              </h3>
             </div>
             <div style={{ height: "2000px" }}>
               <Stamp stamps={stamps} />
@@ -381,26 +372,37 @@ function App() {
             </p>
             <button
               className="btn btn-secondary mb-1"
-              style={{ width: `12rem` }}
+              style={{
+                width: `12rem`,
+                borderLeft:
+                  currentFilter === "all" ? "8px solid black" : "none",
+              }}
               onClick={() => filterStamp("all")}
             >
               All ({allStamps.length})
             </button>
             <button
               className="btn btn-secondary mb-1"
-              style={{ width: `12rem` }}
+              style={{
+                width: `12rem`,
+                borderLeft: currentFilter === "UK" ? "8px solid black" : "none",
+              }}
               onClick={() => filterStamp("UK")}
             >
-              Country:UK (
+              UK (
               {allStamps.filter((s) => s.country.toLowerCase() === "uk").length}
               )
             </button>
             <button
               className="btn btn-secondary mb-1"
-              style={{ width: `12rem` }}
+              style={{
+                width: `12rem`,
+                borderLeft:
+                  currentFilter === "Malaysia" ? "8px solid black" : "none",
+              }}
               onClick={() => filterStamp("Malaysia")}
             >
-              Country:Malaysia (
+              Malaysia (
               {
                 allStamps.filter((s) => s.country.toLowerCase() === "malaysia")
                   .length
@@ -409,12 +411,32 @@ function App() {
             </button>
             <button
               className="btn btn-secondary mb-1"
-              style={{ width: `12rem` }}
+              style={{
+                width: `12rem`,
+                borderLeft:
+                  currentFilter === "USA" ? "8px solid black" : "none",
+              }}
               onClick={() => filterStamp("USA")}
             >
-              Country:USA (
+              USA (
               {
                 allStamps.filter((s) => s.country.toLowerCase() === "usa")
+                  .length
+              }
+              )
+            </button>
+            <button
+              className="btn btn-secondary mb-1"
+              style={{
+                width: `12rem`,
+                borderLeft:
+                  currentFilter === "Australia" ? "8px solid black" : "none",
+              }}
+              onClick={() => filterStamp("Australia")}
+            >
+              Australia (
+              {
+                allStamps.filter((s) => s.country.toLowerCase() === "australia")
                   .length
               }
               )
