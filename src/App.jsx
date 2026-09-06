@@ -25,6 +25,7 @@ function Stamp({ stamps }) {
         display: "flex",
         flexWrap: "wrap",
         gap: "1rem",
+        justifyContent: `center`,
         textAlign: `center`,
       }}
     >
