@@ -1,17 +1,13 @@
-# React + Vite
+# Treasured Stamps of The British Empire
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Implemented features:
 
-Currently, two official plugins are available:
+- Display pre-existing stamps
+- Adding new stamp
+- Filter stamps via Country
+- Added toast message for success/failed stamp addition
+- Implemented responsive layout for both mobile and desktop
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Treasured Stamps of The British Empire](stampscollection.png)
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# StampCollection
+![Form and inputs](form.png)
