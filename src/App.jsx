@@ -308,7 +308,9 @@ function App() {
                 onSubmit={addStamp}
                 className="mt-5 border p-5 bg-secondary rounded"
               >
-                <h2>Add Another Stamp</h2>
+                <h2 style={{ color: `red`, WebkitTextStroke: `1px black` }}>
+                  Add Another Stamp
+                </h2>
                 <Row>
                   <Col md={6}>
                     <label style={{ color: `white` }} htmlFor="stampsname">
