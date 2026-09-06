@@ -21,6 +21,10 @@ const stars = Array(5).fill(0);
 function Stamp({ stamps }) {
   return (
     <div
+      xs={12}
+      sm={6}
+      md={4}
+      lg={3}
       style={{
         display: "flex",
         flexWrap: "wrap",
@@ -31,10 +35,6 @@ function Stamp({ stamps }) {
     >
       {stamps.map((stamp, index) => (
         <Card
-          xs={12}
-          sm={6}
-          md={4}
-          lg={3}
           key={index}
           style={{
             borderColor: `blue`,
