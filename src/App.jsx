@@ -11,7 +11,7 @@ import stampLogo from "./assets/stamp.png";
 const defaultImage = "picsum.photos/200";
 // colors for ratings
 const colors = {
-  red: "red",
+  blue: "blue",
   grey: "a9a9a9",
 };
 // for ratings
@@ -63,15 +63,21 @@ function Stamp({ stamps }) {
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           />
           <Card.Body>
-            <Card.Subtitle>Country: {stamp.country}</Card.Subtitle>
+            <Card.Subtitle
+              style={{ textDecoration: `underline`, fontSize: `1.2rem` }}
+            >
+              Country: {stamp.country}
+            </Card.Subtitle>
+            {index !== 0 ? <Card.Text>{stamp.description}</Card.Text> : ""}
             {stars.map((_, index) => {
               return (
                 <FaSmile
                   key={index}
-                  size={14}
+                  size={30}
+                  style={{ paddingRight: `0.25rem` }}
                   color={
                     stamp.rating.split("/")[0] > index
-                      ? colors.red
+                      ? colors.blue
                       : colors.grey
                   }
                 />
@@ -111,6 +117,7 @@ function App() {
         "i.guim.co.uk/img/media/2cc141155676166cf43006fe6918827b045c6c6a/0_0_1028_1177/master/1028.jpg?width=380&dpr=2&s=none&crop=none",
       country: "UK",
       rating: "3/5",
+      description: `The Penny Red was a famous British postage stamp issued in 1841 to replace the world's first adhesive stamp, the Penny Black.`,
     },
     {
       title: "Inverted Jenny",
@@ -118,6 +125,7 @@ function App() {
         "www.postalmuseum.org/wp-content/uploads/2023/04/inverted-jenny.jpg",
       country: "USA",
       rating: "4/5",
+      description: `The Inverted Jenny is a rare 24-cent U.S. postage stamp issued on May 10, 1918, featuring an accidental printing error where the blue Curtiss JN-4 biplane ("Jenny") in the center is upside down.`,
     },
     {
       title: "1938 Koala",
@@ -125,6 +133,7 @@ function App() {
         "i.guim.co.uk/img/media/90c1dd3fdb8abef5193804d2f8b0de55c64f3ca2/0_0_590_700/master/590.png?width=445&dpr=1&s=none&crop=none",
       country: "Australia",
       rating: "5/5",
+      description: `The 1938 Australia Koala stamp is an iconic 4d (fourpence) pre-decimal postage stamp featuring a native koala hugging a tree branch.`,
     },
     {
       title: "Malay States",
@@ -132,18 +141,21 @@ function App() {
         "www.paulfrasercollectibles.com/cdn/shop/files/RS3359_500x.jpg?v=1716542406",
       country: "Malaysia",
       rating: "5/5",
+      description: `Federated Malay States (FMS) postage stamps were issued between 1900 and 1934 for a federation of four protected states under British rule: Perak, Selangor, Negri Sembilan, and Pahang.`,
     },
     {
       title: "One Penny",
       image: "www.cherrystoneauctions.com/scans_cache/201908_1770_200_180.jpg",
       country: "UK",
       rating: "4/5",
+      description: `The value of a UK one-penny stamp depends entirely on its type, age, and condition, ranging from just a few pence for common Victorian issues to hundreds of thousands of pounds for rare plates.`,
     },
   ]);
   // initialise other states
   const [stamps, setStamps] = useState(allStamps);
   const [stampName, setStampName] = useState("");
   const [stampImage, setStampImage] = useState("");
+  const [stampDescription, setStampDescription] = useState("");
   const [country, setCountry] = useState("UK");
   const [filteredStampNum, setFilteredStampNum] = useState(allStamps.length);
   const [rating, setRating] = useState("1/5");
@@ -195,7 +207,13 @@ function App() {
 
     // to use given stamp's image URL or use default from picsum
     const imageToUse = stampImage.trim() === "" ? defaultImage : stampImage;
-    const newStamp = { title: stampName, image: imageToUse, country, rating };
+    const newStamp = {
+      title: stampName,
+      image: imageToUse,
+      country,
+      rating,
+      description: stampDescription,
+    };
 
     // update allStamps states with the new stamp info
     const updatedAll = [...allStamps, newStamp];
@@ -209,6 +227,7 @@ function App() {
     setStampImage("");
     setCountry("UK");
     setRating("1/5");
+    setStampDescription("");
   }
 
   const countryOptions = ["UK", "Malaysia", "USA", "Australia"];
@@ -337,6 +356,24 @@ function App() {
                       className="form-control"
                       value={rating}
                       onChange={setRating}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <label
+                      style={{ color: `white` }}
+                      htmlFor="stampsdescription"
+                    >
+                      Stamp's Description:
+                    </label>
+                    <textarea
+                      type="text"
+                      className="form-control"
+                      id="stampsdescription"
+                      placeholder="Stamp's description"
+                      value={stampDescription}
+                      onChange={(e) => setStampDescription(e.target.value)}
                     />
                   </Col>
                 </Row>
