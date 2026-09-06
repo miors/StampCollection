@@ -7,6 +7,7 @@ import headerBg from "./assets/union-jack3.jpg";
 import scrollColumnBg from "./assets/reddish.png";
 import unionJack from "./assets/union-jack-transparent.png";
 import stampLogo from "./assets/stamp.png";
+import { Toaster, toast } from "react-hot-toast";
 
 // colors for ratings
 const colors = {
@@ -196,6 +197,8 @@ function App() {
     e.preventDefault();
     const formErrors = validate();
     if (Object.keys(formErrors).length > 0) {
+      //show toast
+      toast.error("Stamp not added");
       setErrors(formErrors);
       setValidated(true); // mark form as validated so CSS triggers
       return; // stop submission
@@ -205,10 +208,10 @@ function App() {
     setErrors({});
     setValidated(false);
 
-    if (!stampName.trim()) {
-      alert("Please fill in stamp name!");
-      return;
-    }
+    // if (!stampName.trim()) {
+    //   alert("Please fill in stamp name!");
+    //   return;
+    // }
 
     // to use given stamp's image URL or use default from picsum
     const imageToUse =
@@ -236,6 +239,9 @@ function App() {
     setCountry("UK");
     setRating("1/5");
     setStampDescription("");
+
+    //show toast
+    toast.success("Stamp added");
   }
 
   const countryOptions = ["UK", "Malaysia", "USA", "Australia"];
@@ -244,6 +250,7 @@ function App() {
   return (
     <>
       <Container>
+        <Toaster />
         <Row>
           {/* SCROLLABLE COLUMN */}
           <Col
