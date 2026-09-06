@@ -79,8 +79,8 @@ function Stamp({ stamps }) {
               return (
                 <FaSmile
                   key={index}
-                  size={30}
-                  style={{ paddingRight: `0.25rem` }}
+                  size={24}
+                  style={{ paddingRight: `0.2rem` }}
                   color={
                     stamp.rating.split("/")[0] > index
                       ? colors.blue
