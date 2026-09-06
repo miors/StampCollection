@@ -53,7 +53,7 @@ function Stamp({ stamps }) {
             style={
               index === 0
                 ? {
-                    height: "300px",
+                    height: "250px",
                     objectFit: "contain",
                     transition: "transform .3s ease",
                   }
