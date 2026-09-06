@@ -8,7 +8,6 @@ import scrollColumnBg from "./assets/reddish.png";
 import unionJack from "./assets/union-jack-transparent.png";
 import stampLogo from "./assets/stamp.png";
 
-const defaultImage = "picsum.photos/200";
 // colors for ratings
 const colors = {
   blue: "blue",
@@ -212,7 +211,10 @@ function App() {
     }
 
     // to use given stamp's image URL or use default from picsum
-    const imageToUse = stampImage.trim() === "" ? defaultImage : stampImage;
+    const imageToUse =
+      stampImage.trim() === ""
+        ? `picsum.photos/${Math.ceil(Math.random() * 200)}`
+        : stampImage;
     const newStamp = {
       title: stampName,
       image: imageToUse,
