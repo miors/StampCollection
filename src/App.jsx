@@ -30,12 +30,17 @@ function Stamp({ stamps }) {
     >
       {stamps.map((stamp, index) => (
         <Card
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
           key={index}
           style={{
             borderColor: `blue`,
             borderWidth: `2px`,
             borderRadius: `15px`,
-            width: "18rem",
+            width: "16rem",
+            // height: `100%`,
             padding: "1rem",
             backgroundImage: `url(${staticColumnBg})`,
           }}
@@ -166,7 +171,7 @@ function App() {
   // validate stamp's name field
   function validate() {
     const newErrors = {};
-    if (!stampName.trim()) newErrors.stampName = "Stamp name is required";
+    if (!stampName.trim()) newErrors.stampName = "Stamp's name is required";
 
     return newErrors;
   }
@@ -235,11 +240,12 @@ function App() {
 
   return (
     <>
-      <Container fluid>
+      <Container>
         <Row>
           {/* SCROLLABLE COLUMN */}
           <Col
             md={9}
+            xs={12}
             className="pb-4"
             style={{ backgroundImage: `url(${scrollColumnBg})` }}
           >
@@ -253,7 +259,6 @@ function App() {
                 backgroundImage: `url(${headerBg})`,
                 color: `red`,
                 fontWeight: `4000`,
-                fontSize: `2rem`,
                 marginBottom: `1rem`,
                 display: `flex`,
                 justifyContent: `space-between`, // push left and right apart
@@ -274,7 +279,7 @@ function App() {
                   style={{
                     color: "white",
                     fontWeight: "bold",
-                    fontSize: "1.25rem",
+                    // fontSize: "1.25rem",
                     paddingLeft: `1rem`,
                   }}
                 >
@@ -289,13 +294,12 @@ function App() {
                   textAlign: "right",
                   paddingRight: `2rem`,
                   flex: 1,
-                  fontSize: `3rem`,
                 }}
               >
                 Treasured Stamps of the British Empire
               </h3>
             </div>
-            <div style={{ height: "2000px" }}>
+            <div style={{ height: "auto" }}>
               <Stamp stamps={stamps} />
 
               <form
@@ -390,6 +394,7 @@ function App() {
           {/* NON-SCROLLABLE COLUMN */}
           <Col
             md={3}
+            xs={12}
             className="position-sticky top-0 vh-100 bg-light p-4"
             style={{
               textAlign: `center`,
@@ -410,7 +415,7 @@ function App() {
             <button
               className="btn btn-secondary mb-1"
               style={{
-                width: `12rem`,
+                width: `80%`,
                 borderLeft:
                   currentFilter === "all" ? "8px solid black" : "none",
               }}
@@ -421,7 +426,7 @@ function App() {
             <button
               className="btn btn-secondary mb-1"
               style={{
-                width: `12rem`,
+                width: `80%`,
                 borderLeft: currentFilter === "UK" ? "8px solid black" : "none",
               }}
               onClick={() => filterStamp("UK")}
@@ -433,7 +438,7 @@ function App() {
             <button
               className="btn btn-secondary mb-1"
               style={{
-                width: `12rem`,
+                width: `80%`,
                 borderLeft:
                   currentFilter === "Malaysia" ? "8px solid black" : "none",
               }}
@@ -449,7 +454,7 @@ function App() {
             <button
               className="btn btn-secondary mb-1"
               style={{
-                width: `12rem`,
+                width: `80%`,
                 borderLeft:
                   currentFilter === "USA" ? "8px solid black" : "none",
               }}
@@ -465,7 +470,7 @@ function App() {
             <button
               className="btn btn-secondary mb-1"
               style={{
-                width: `12rem`,
+                width: `80%`,
                 borderLeft:
                   currentFilter === "Australia" ? "8px solid black" : "none",
               }}
@@ -481,7 +486,7 @@ function App() {
             <img
               src={unionJack}
               alt="union jack flag"
-              style={{ width: "200px", height: "auto" }}
+              style={{ width: "80%", height: "auto" }}
             />
           </Col>
         </Row>
